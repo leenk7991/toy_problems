@@ -11,5 +11,23 @@
  */
 
 const commonCharacters = (str1, str2) => {
-  // TODO
+  var already_found = [];
+  str1 = str1.replace(" ", "");
+  str2 = str2.replace(" ", "");
+  str1_length = str1.length;
+  for (var i = 0; i < str1_length; i++) {
+    ch = str1[i];
+    if (str2.includes(ch)) {
+      already_found.push(ch);
+      str2 = str2.replace(ch, "");
+    }
+  }
+  return already_found.join("");
 };
+
+describe("Tests", () => {
+  it("test commonCharacters", () => {
+    expect(commonCharacters("acexivou", "aegihobu")).toEqual("aeiou");
+    expect(commonCharacters("abcdefgggii", "ccdfghki")).toEqual("cdfgi");
+  });
+});
