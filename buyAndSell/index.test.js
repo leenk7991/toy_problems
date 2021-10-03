@@ -26,7 +26,7 @@ function getMinOfArray(numArray) {
   return Math.min.apply(null, numArray);
 }
 
-var maximumProfit = function (array) {
+const maximumProfit = function (array) {
   var buy_at = getMinOfArray(array);
   var sell_at = getMaxOfArray(array.slice(array.indexOf(buy_at)));
   return sell_at - buy_at;
