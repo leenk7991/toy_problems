@@ -8,5 +8,12 @@
  */
 
 const bitCounting = (num) => {
-  // TODO
+  return num.toString(2).match(/1/g || []).length;
 };
+
+describe("Tests", () => {
+  it("test bitCounting", () => {
+    expect(bitCounting(1234)).toStrictEqual(5);
+    expect(bitCounting(10)).toStrictEqual(2);
+  });
+});
