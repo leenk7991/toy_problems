@@ -15,6 +15,28 @@ flatten('a', ['b', 2], 3, null, [[4], ['c']])
 // returns ['a', 'b', 2, 3, null, 4, 'c']
 */
 
-const flatten = () => {
-
-};
+function flatten() {
+  let args = Array.from(arguments);
+  return args.reduce((previousValue, currentValue) => {
+    if (Array.isArray(currentValue)) {
+      return previousValue.concat(...currentValue);
+    }
+    return previousValue.concat(...[currentValue]);
+  }, []);
+}
+describe("Tests", () => {
+  it("test flattem", () => {
+    expect(flatten(1, [2, 3], 4, 5, [6, [7]])).toStrictEqual([
+      1, 2, 3, 4, 5, 6, 7,
+    ]);
+    expect(flatten("a", ["b", 2], 3, null, [[4], ["c"]])).toStrictEqual([
+      "a",
+      "b",
+      2,
+      3,
+      null,
+      4,
+      "c",
+    ]);
+  });
+});
