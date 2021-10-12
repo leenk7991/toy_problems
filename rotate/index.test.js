@@ -24,6 +24,36 @@ rotate(data, 11)    // => [5, 1, 2, 3, 4]
 rotate(data, 12478) // => [3, 4, 5, 1, 2]
 */
 
-const rotate = function(array, steps) {
-
+const rotate = function (array, steps) {
+  let l = array.length;
+  let new_array = array.slice();
+  if (steps >= l) {
+    steps = steps % l;
+  }
+  if (steps == 0) return new_array;
+  if (steps > 0) {
+    for (let i = 0; i < steps; i++) {
+      new_array.unshift(new_array.pop());
+    }
+  } else {
+    steps = steps * -1;
+    for (let i = 0; i < steps; i++) {
+      new_array.push(new_array.shift());
+    }
+  }
+  return new_array;
 };
+
+describe("Tests", () => {
+  it("test rotate", () => {
+    var data = [1, 2, 3, 4, 5];
+    expect(rotate(data, 1)).toStrictEqual([5, 1, 2, 3, 4]);
+    expect(rotate(data, 2)).toStrictEqual([4, 5, 1, 2, 3]);
+    expect(rotate(data, 5)).toStrictEqual([1, 2, 3, 4, 5]);
+    expect(rotate(data, -1)).toStrictEqual([2, 3, 4, 5, 1]);
+    expect(rotate(data, -2)).toStrictEqual([3, 4, 5, 1, 2]);
+    expect(rotate(data, -5)).toStrictEqual([1, 2, 3, 4, 5]);
+    expect(rotate(data, 7)).toStrictEqual([4, 5, 1, 2, 3]);
+    expect(rotate(data, 12478)).toStrictEqual([3, 4, 5, 1, 2]);
+  });
+});
