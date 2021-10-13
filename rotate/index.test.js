@@ -42,6 +42,9 @@ const rotate = function (array, steps) {
     }
   }
   return new_array;
+
+  // const rotate = function(array, steps) {
+  //   return [...array.slice(steps, array.length), ...array.slice(0, steps)];
 };
 
 describe("Tests", () => {
