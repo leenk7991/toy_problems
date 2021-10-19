@@ -8,18 +8,19 @@ of calling the callback function.
 See example usage to understand what arguments are passed to the callback.
 */
 
-Array.prototype.map = function(callback) {
-
+Array.prototype.map = function (callback) {
+  let new_arr = Array(this.length);
+  for (let i = 0; i < this.length; i++) {
+    new_arr[i] = callback(this[i], i, this);
+  }
+  return new_arr;
 };
 
-/*
-Example usage:
-var transform = function(element,index,array){
+// Example usage:
+var transform = function (element, index, array) {
   return array[index] + index + element;
 };
-["a","b","c"].map(transform); //should return ['a0a','b1b','c2c'];
-*/
-
+console.log(["a", "b", "c"].map(transform)); //should return ['a0a','b1b','c2c'];
 
 /*
 Problem 2:
@@ -31,31 +32,35 @@ with the error message - a simple string that says "Incorrect argument(s)".
 Please see example usage to understand what should be passed to the callback.
 */
 
-const asyncSum = function(a, b, callback) {
-
+const asyncSum = function (a, b, callback) {
+  if (isNaN(a) || isNaN(b)) {
+    return callback("Incorrect argument(s)");
+  }
+  setTimeout(() => {
+    return callback(null, a + b);
+  }, 1000);
+  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  // return callback(null, a + b);
 };
 
 /*
 Example use:
 */
 
-const logNumber = function(error, number) {
+const logNumber = function (error, number) {
   if (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
   } else {
-    console.log('The total is: ', number);
+    console.log("The total is: ", number);
   }
 };
 
-/*
-asyncSum(10,7,logNumber);//should print "The total is: 17" after 1 second
-asyncSum(10,"B",logNumber);
+asyncSum(10, 7, logNumber); //should print "The total is: 17" after 1 second
+asyncSum(10, "B", logNumber);
 //should print "Error: Incorrect argument(s)" after 1 second
-*/
-
 
 /*
 Problem 3 (ADVANCED):
 What kind of candy do you like?
-Your answer:
+Your answer: ferrero rocher
 */
