@@ -33,14 +33,12 @@ Please see example usage to understand what should be passed to the callback.
 */
 
 const asyncSum = function (a, b, callback) {
-  if (isNaN(a) || isNaN(b)) {
-    return callback("Incorrect argument(s)");
-  }
   setTimeout(() => {
+    if (isNaN(a) || isNaN(b)) {
+      return callback("Incorrect argument(s)");
+    }
     return callback(null, a + b);
   }, 1000);
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
-  // return callback(null, a + b);
 };
 
 /*
